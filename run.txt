@@ -1,0 +1,7 @@
+run backend:python
+.\venv\scripts\activate.ps1
+pip install -r requirements.txt
+python -m uvicorn backend.app:app --port 8000 --reload
+backend.app:app: Tells uvicorn to look inside the backend folder, open app.py, and use the app instance (your FastAPI/Starlette app).
+--port 8000: Sets the server to run on port 8000.
+--reload: Automatically restarts the server whenever you save changes to your code.

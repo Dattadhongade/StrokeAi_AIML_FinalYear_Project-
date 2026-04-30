@@ -1,0 +1,36 @@
+# ============================================================
+# Multi-Modal AI Framework for Early Stroke Risk Detection
+# Requirements — Python 3.10+ (tested on Python 3.14.2)
+# Install: pip install -r requirements.txt
+# ============================================================
+
+# Web framework
+fastapi==0.135.3
+uvicorn[standard]==0.43.0
+python-multipart==0.0.24
+starlette==1.0.0
+anyio==4.13.0
+
+# Image processing
+# NOTE: Pillow is NOT compatible with Python 3.14 yet.
+# OpenCV handles all image I/O needs for this project.
+opencv-python-headless==4.13.0.92
+
+# Audio processing
+librosa==0.11.0
+soundfile==0.13.1
+
+# Numerical / ML
+numpy==2.4.4
+scikit-learn==1.8.0
+scipy==1.17.1
+
+# Serialization / utilities
+joblib==1.5.3
+google-generativeai==0.8.4
+python-dotenv==1.0.1
+
+# Research / Visualization
+matplotlib==3.10.9
+pandas==3.0.2
+seaborn==0.13.2
