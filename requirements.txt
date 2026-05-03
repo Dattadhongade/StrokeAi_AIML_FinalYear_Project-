@@ -34,3 +34,10 @@ python-dotenv==1.0.1
 matplotlib==3.10.9
 pandas==3.0.2
 seaborn==0.13.2
+
+# Authentication & Database
+motor
+PyJWT
+passlib
+bcrypt==3.2.2
+google-auth

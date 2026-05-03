@@ -31,6 +31,7 @@ from backend.routes.speech import router as speech_router
 from backend.routes.fusion import router as fusion_router
 from backend.routes.chatbot import router as chatbot_router
 from backend.routes.reports import router as reports_router
+from backend.routes.auth import router as auth_router
 
 # ── Model pre-loaders ─────────────────────────────────────────────────────────
 from backend.models.face_model.face_model     import load_model as load_face_model
@@ -86,6 +87,7 @@ app.include_router(speech_router, tags=["Speech Analysis"])
 app.include_router(fusion_router, tags=["Multi-Modal Fusion"])
 app.include_router(chatbot_router, tags=["Chatbot"])
 app.include_router(reports_router, tags=["Clinical Reports & Integration"])
+app.include_router(auth_router, tags=["Authentication"])
 
 # ── Static files (frontend) ───────────────────────────────────────────────────
 if FRONTEND_DIR.exists():
@@ -101,6 +103,9 @@ if FRONTEND_DIR.exists():
 async def startup_event():
     """Pre-load AI models on startup to avoid cold-start latency on first request."""
     logger.info("=== Stroke Detection Server Starting ===")
+    from backend.utils.db import connect_to_mongo
+    await connect_to_mongo()
+    
     try:
         load_face_model()
         logger.info("✓ Face model loaded.")
@@ -119,6 +124,8 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     logger.info("=== Stroke Detection Server Shutting Down ===")
+    from backend.utils.db import close_mongo_connection
+    await close_mongo_connection()
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
